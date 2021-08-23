@@ -1,0 +1,125 @@
+/*Ocultar elemento*/
+.nav-close  {
+    display: none !important;
+}
+.nav-title {
+    color: #e5883f !important;
+}
+
+/*Formato de botão Medcin*/
+.button-medcin {
+    color: white !important;
+    background-color: #e5883f !important;
+    border-color: #e5883f !important;
+    width: 100%;
+    height: 35px;
+    border-radius: 4px;
+    box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
+}
+
+.button-medcin:hover {
+
+    color: white !important;
+    background-color: #c27438 !important;
+    border-color: #c27438 !important;
+    width: 100%;
+    height: 35px;
+    border-radius: 4px;
+    box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
+
+}
+
+/*Paragrafo na cor cinza*/
+.p-cinza {
+    color: #a9a9a9;
+}
+
+/*Jubotrom da Medcin (paragrafo)*/
+.j-medcin-p {
+    color: #e5883f !important;
+
+}
+
+/*Jubotrom da Medcin (titulo h1)*/
+.j-medcin-h1 {
+    color: #898989 !important;
+}
+
+/*Painel da Medcin (div 1)*/
+.painel-medcin-div1 {
+    border-color: #e5883f !important;
+}
+
+/*Painel da Medcin (div 2)*/
+.painel-medcin {
+    background-color: #e5883f !important;
+    border-color: #e5883f !important;
+    color: white !important;
+}
+
+/*Inputs invisíveis*/
+.invisible-input {
+    border-color: transparent !important;
+    background-color: white !important;
+    pointer-events: none !important;
+    
+}
+
+.descricao-input {
+    height: 100px !important;
+    width: 280px !important;
+}
+
+.title-medcin {
+    text-align: center;
+
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: rgba(0,0,0,0.8);
+    z-index: 99999;
+    opacity:0;
+    -webkit-transition: opacity 400ms ease-in;
+    -moz-transition: opacity 400ms ease-in;
+    transition: opacity 400ms ease-in;
+    pointer-events: none;
+}
+
+.modal:target {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal > div {
+    width: 400px;
+    position: relative;
+    margin: 10% auto;
+    padding: 15px 20px;
+    background: #fff;
+}
+
+.fechar {
+    position: absolute;
+    width: 30px;
+    right: -15px;
+    top: -20px;
+    text-align: center;
+    line-height: 30px;
+    margin-top: 5px;
+    background: #ff4545;
+    border-radius: 50%;
+    font-size: 16px;
+    color: #8d0000;
+}
+
+.off {
+    pointer-events: none !important;
+
+}
+

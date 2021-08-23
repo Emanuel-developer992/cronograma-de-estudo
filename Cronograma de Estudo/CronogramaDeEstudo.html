@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript" src="/portal/resources/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="/portal/resources/js/jquery/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/portal/resources/js/mustache/mustache-min.js"></script>
+    <script type="text/javascript" src="/style-guide/js/fluig-style-guide.min.js"> charset="uft-8"</script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!--Meu CSS -->
+    <link href="css/CronogramaDeEstudo.css" rel="stylesheet">
+
+</head>
+
+<script type="text/javascript" src="/webdesk/vcXMLRPC.js"></script>
+
+<body>
+    <div class="fluig-style-guide">
+        <form name="form" role="form">
+
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            
+            <li class="nav-item">
+            <a id="filtro_projeto_tabs" class="nav-link nav-title nav-close active" data-toggle="tab" href="#filtro_projeto_nav">Filtro de Projeto</a>
+            </li>
+            <li class="nav-item">
+                <a id="controle_estudo_tabs" class="nav-link nav-title nav-close" data-toggle="tab" href="#controle_estudo_nav">Controle de Estudo</a>
+            </li>
+        </ul>
+
+            <div class="tab-content">
+
+                <!--Navegação 1 (Filtro de Projeto) -->
+                <div id="filtro_projeto_nav" class="container tab-pane active" aria-selected="false">
+
+                    <div class="jumbotron jumbotron-fluid">
+                        <div class="container">
+                            <h1 class="display-4 j-medcin-p">Filtro</h1>
+                            <p class="lead j-medcin-h1">Filtro de Projetos</p>
+                        </div>
+                    </div>
+
+                    <!-- 1° Painel -->
+                    <div class="panel panel-primary painel-medcin-div1" style="padding: 0px">
+                        <div class="panel-heading painel-medcin">
+                            <h3 class="panel-title">Campo de Busca</h3>
+                        </div>
+                        <div class="panel-body">
+
+                            <div class="row">
+
+                                <!-- 1º Input-->
+                                <div class="form-group col-md-12">
+                                    <label for="number_orc">Número de Orçamento</label>
+                                    <input
+                                        type="zoom"
+                                        id = "number_orc"
+                                        name="number_orc"
+                                        data-zoom="{
+                                            'displayKey':'idO',
+                                            'datasetId':'DSCadastroGeral',
+                                            'maximumSelectionLength':'1',
+                                            'placeholder':'Selecione...',
+                                            'fields':[
+                                                {
+                                                'field':'idO',
+                                                'label':'ID'
+                                                },{
+                                                'field':'client',
+                                                'label':'Cliente/Patrocinador',
+                                                'standard':'true'
+                                                }
+                                            ]
+                                        }"
+                                    />
+
+                                </div>
+
+                                <!-- 2º Input-->
+                                <div class="form-group col-md-4">
+                                    <label for="number_project">Número de Projeto</label>
+                                    <input id="number_project" name="number_project" type="text" class="form-control" placeholder="Número de Projeto" readonly>
+                                </div>
+
+                                <!-- 3º Input-->
+                                <div class="form-group col-md-4">
+                                    <label for="client_patroc_search">Cliente/Patrocinador</label>
+                                    <input id="client_patroc_search" name="client_patroc_search" type="text" class="form-control" placeholder="Cliente/Patrocinador" readonly>
+                                </div>
+
+                                <!-- 5º Input-->
+                                <div class="form-group col-md-4">
+                                    <label for="name_project">Nome do Projeto</label>
+                                    <input id="name_project" name="name_project" type="text" class="form-control" placeholder="Nome do Projeto" readonly>
+                                </div>
+
+                                <div class="clearfix"></div>
+                                <br>
+                                <br>
+                                <div class="col-md-3">
+                                    <button id="button_abrir" class="btn button-medcin" onclick="valid();">Abrir</i></button>
+                                </div> 
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <br>
+                    <br>
+
+                    
+
+                </div>
+
+                <!--Navegação 2 (Controle de Estudo PCP) -->
+                <div id="controle_estudo_nav" class="container tab-pane" aria-selected="false">
+
+                    <div class="jumbotron jumbotron-fluid">
+                        <div class="container">
+                            <h1 class="display-4 j-medcin-p">Controle de Estudo</h1>
+                            <p class="lead j-medcin-h1">Controle de estudo Medcin</p>
+                        </div>
+                    </div>
+
+                    <!-- 1° Painel -->
+                    <div class="panel panel-primary painel-medcin-div1" style="padding: 0px">
+                        <div class="panel-heading painel-medcin">
+                            <h3 class="panel-title">Projeto</h3>
+                        </div>
+                        <div class="panel-body">
+
+                            <div class="row">
+
+                                <!-- 1º Input-->
+                                <div class="form-group col-md-2">
+                                    <label for="nOrc_project">Número de Orçamento</label>
+                                    <input id="nOrc_project" name="nOrc_project" type="text" class="form-control" value="1" readonly>
+                                </div>
+
+                                <div class="clearfix"></div>
+
+                                <!-- 2º Input-->
+                                <div class="form-group col-md-4">
+                                    <label for="nProject">Número de Projeto</label>
+                                    <input id="nProject" name="nProject" type="text" class="form-control" value="001-2021" readonly>
+                                </div>
+
+                                <!-- 3º Input-->
+                                <div class="form-group col-md-4">
+                                    <label for="cp_project">Cliente/Patrocinador</label>
+                                    <input id="cp_project" name="cp_project" type="text" class="form-control" value="X" readonly>
+                                </div>
+
+                                <!-- 4º Input-->
+                                <div class="form-group col-md-4">
+                                    <label for="status_project">Status</label>
+                                    <input id="status_project" name="status_project" type="text" class="form-control" value="Em Aberto" readonly>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3° Painel -->
+                    <div class="panel panel-primary painel-medcin-div1" style="padding: 0px">
+                        <div class="panel-heading painel-medcin">
+                            <h3 class="panel-title">Cronograma do Projeto/Orçamento</h3>
+                        </div>
+                        <div class="panel-body">
+
+                            <div class="row">
+
+                                <!-- Tabela 1--> 
+                                <div class="table-responsive col-md-12" >
+                                    <table tablename="tb_projectOrc" class="table" id="tb_projectOrc" noaddbutton="true" nodeletebutton="true">
+                                        <thead>
+                                            <tr>
+                                                <th>Número de Orçamento</th>
+                                                <th>Código do Produto</th>
+                                                <th>Nome do Projeto</th>
+                                                <th>Cliente/Patrocinador</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><input type="text" id="tb_nOrc" name="tb_nOrc" class="invisible-input" readonly></td>
+                                                <td><input type="text" id="tb_codp" name="tb_codp" class="invisible-input" readonly></td>
+                                                <td><input type="text" id="tb_nProj" name="tb_nProj" class="invisible-input" readonly></td>
+                                                <td><input type="text" id="tb_cp" name="tb_cp" class="invisible-input" readonly></td>
+                                                <td><input type="text" id="tb_status" name="tb_status" class="form-control" value="Em Aberto" readonly></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                 <!-- Tabela 2--> 
+                                 <div class="table-responsive col-md-12" >
+                                    <table tablename="tb_sub" class="table" id="tb_sub" noaddbutton="true" nodeletebutton="true">
+                                        <thead>
+                                            <tr>
+                                                <th>Item</th>
+                                                <th>Descrição do Item/Sub-Item</th>
+                                                <th>Responsável</th>
+                                                <th>Prazo</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><input type="text" id="tb_nitem" name="tb_nitem" class="invisible-input" readonly></td>
+                                                <td><input type="text" id="tb_descSI" name="tb_descSI" class="invisible-input" readonly></td>
+                                                <td><input type="text" id="tb_respon" name="tb_respon" class="invisible-input" readonly></td>
+                                                <td><input type="text" id="tb_prazo" name="tb_prazo" class="form-control" readonly></td>
+                                                <td><input type="text" id="tb_status1" name="tb_status1" class="form-control" readonly></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- 4° Painel -->
+                    <div id="div_mov" class="panel panel-primary painel-medcin-div1" style="padding: 0px">
+                        <div class="panel-heading painel-medcin">
+                            <h3 class="panel-title">Movimento do Projeto</h3>
+                        </div>
+
+                        <div class="panel-body">
+
+                            <div class="row">
+
+                                <!-- 5º Input-->
+                                <div class="form-group col-md-3">
+                                    <label for="selectNumber">Número da item</label>
+                                    <p class="p-cinza">Selecione o número do item para aplicar uma ação.</p>
+                                    <select id="selectNumber" name="selectNumber" type="date" class="form-control" style="text-align: center;"></select>
+                                </div>
+
+                                 <!-- 5º Input-->
+                                 <div class="form-group col-md-12">
+                                    <label for="descricao_move">Descrição</label>
+                                    <p class="p-cinza">Descrição da Avaliação da Eficácia da Ação</p>
+                                    <textarea id="descricao_move" name="descricao_move" type="text" class="form-control"></textarea>
+                                </div>
+
+                                 <!-- 6º Input-->
+                                 <div class="form-group col-md-4">
+                                    <label for="prazo_move">Prazo</label>
+                                    <input id="prazo_move" name="prazo_move" type="date" class="form-control">
+                                </div>
+
+                                 <!-- 7º Input-->
+                                 <div class="form-group col-md-4">
+                                    <label for="resp_move">Responsável</label>
+                                    <input id="resp_move" name="resp_move" type="text" class="form-control" placeholder="Responsável" readonly>
+                                </div>
+
+                                 <!-- 8º Input-->
+                                 <div class="form-group col-md-4">
+                                    <label for="date_move">Data de Encerramento</label>
+                                    <input id="date_move" name="date_move" type="date" class="form-control">
+                                </div>
+
+                                 <!-- 9º Input-->
+                                 <div class="form-group col-md-3" style="display: none;">
+                                    <label for="status_move">Status</label>
+                                    <input id="status_move" name="status_move" type="text" class="form-control" readonly>
+                                </div>
+
+                                <div class="clearfix"></div>
+                                <br>
+
+                                <div class="col-md-3">
+                                    <button id="button_save" class="btn button-medcin" onclick="validation();">Salvar</i></button>
+                                    <p id="p_validation" class="nav-close" style="color: rgb(222, 20, 20);">Por favor preencha corretamente todos os campos!</p>
+                                </div>
+ 
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- 5° Painel -->
+                    <div class="panel panel-primary painel-medcin-div1" style="padding: 0px">
+                        <div class="panel-heading painel-medcin">
+                            <h3 class="panel-title">Histórico de Movimentação do Projeto</h3>
+                        </div>
+
+                        <div class="panel-body">
+
+                            <div class="row">
+
+                                <!-- Tabela (HIstórico)-->
+
+                                <div class="title-medcin">
+                                    <h1>Histórico</h1>
+                                </div>                      
+                                <div class="table-responsive col-md-12">
+                                    <table tablename="tb_hist_projeto" class="table" id="tb_hist_projeto" noaddbutton="true" nodeletebutton="true">
+                                        <thead>
+                                            <tr>
+                                                <th>Nº Ação</th>
+                                                <th>Nº do Item</th>
+                                                <th>Descrição da Avaliação da Ericácia da Ação</th>
+                                                <th>Prazo</th>
+                                                <th>Responsável</th>
+                                                <th>Data de Encerramento</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td style="width: 90%;"><input type="text" id="tb_nAcao" name="tb_nAcao" class="invisible-input" style="width: 90%;" readonly></td>
+                                                <td style="width: 90%;"><input type="text" id="tb_nitemH" name="tb_nitemH" class="invisible-input" style="width: 90%;" readonly></td>
+                                                <td><input type="text" id="tb_descH" name="tb_descH" class="invisible-input" readonly></td>
+                                                <td><input type="text" id="tb_prazoH" name="tb_prazoH" class="invisible-input" readonly></td>
+                                                <td><input type="text" id="tb_respH" name="tb_respH" class="invisible-input" readonly></td>
+                                                <td><input type="text" id="tb_encerramento" name="tb_encerramento" class="invisible-input" readonly></td>
+                                                <td><input type="text" id="tb_statusH" name="tb_statusH" class="invisible-input" readonly></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                                 
+
+                </div>
+
+            <!-- Meu Script -->    
+            <script type="text/javascript" src="js/CronogramaDeEstudo.js"></script>
+
+        </form>
+    </div>
+</body>
+</html>
