@@ -87,8 +87,8 @@
 
                                 <!-- 2º Input-->
                                 <div class="form-group col-md-4">
-                                    <label for="cod_externo">Código Externo</label>
-                                    <input id="cod_externo" name="cod_externo" type="text" class="form-control" placeholder="Código Externo" readonly>
+                                    <label for="cod_amt">Código</label>
+                                    <input id="cod_amt" name="cod_amt" type="text" class="form-control" placeholder="Código" readonly>
                                 </div>
 
                                 <!-- 2/3º Input-->
@@ -169,14 +169,7 @@
                                 <!-- 12º Input-->
                                 <div class="form-group col-md-4">
                                     <label for="medida_solict">Unidade de Medida</label>
-                                    <select id="medida_solict" name="medida_solict" type="text" class="form-control">
-                                        <option value="">Selecione...</option>
-                                        <option value="Kg">Kg</option>
-                                        <option value="g">g</option>
-                                        <option value="L">L</option>
-                                        <option value="ml">ml</option>
-                                        <option value="Unidade">Unidade</option>
-                                    </select>
+                                    <input id="medida_solict" name="medida_solict" type="text" class="form-control" readonly>
                                 </div>
 
                             </div>
@@ -218,14 +211,7 @@
                                 <!-- 16º Input-->
                                 <div class="form-group col-md-4">
                                     <label for="medida_regist">Unidade de Medida</label>
-                                    <select id="medida_regist" name="medida_regist" type="text" class="form-control">
-                                        <option value="">Selecione...</option>
-                                        <option value="Kg">Kg</option>
-                                        <option value="g">g</option>
-                                        <option value="L">L</option>
-                                        <option value="ml">ml</option>
-                                        <option value="Unidade">Unidade</option>
-                                    </select>
+                                    <input id="medida_regist" name="medida_regist" type="text" class="form-control" readonly>
                                 </div>
 
                             </div>
@@ -315,6 +301,7 @@
                                         <thead>
                                             <tr>
                                                 <th>Nº Ação</th>
+                                                <th>Código</th>
                                                 <th>Ação</th>
                                                 <th>Data</th>
                                                 <th>Responsável</th>
@@ -325,6 +312,7 @@
                                         <tbody>
                                             <tr>
                                                 <td><input type="text" id="tb_nAcao" name="tb_nAcao" class="invisible-input" readonly></td>
+                                                <td><input type="text" id="tb_cod" name="tb_cod" class="invisible-input" readonly></td>
                                                 <td><input type="text" id="tb_acao" name="tb_acao" class="invisible-input" readonly></td>
                                                 <td><input type="text" id="tb_date" name="tb_date" class="invisible-input" readonly></td>
                                                 <td><input type="text" id="tb_resp" name="tb_resp" class="invisible-input" readonly></td>
@@ -342,7 +330,12 @@
 
                 </div>
 
-
+                <!-- Input -->
+                <div class="clearfix"></div>
+                <div class="form-group col-md-4 nav-close">
+                    <label for="descForm">Descrição do Docuemento</label>
+                    <input name="descForm" type="text" class="form-control" id="descForm">
+                </div>
 
             <!-- Meu Script -->    
             <script type="text/javascript" src="js/MoviDeAmostra.js"></script>

@@ -5,16 +5,6 @@ window.onload = function() {
    usuario();
    navegation(getWKNumState());
 
-    console.log("--------");
-    console.log(getFormMode());
-    console.log(getMobile());
-    console.log(getWKNumState());
-    console.log(getWKUser());
-    console.log(getWKNumProces());
-    console.log(getWKUserLocale());
-    console.log(getWKCardId());
-    console.log("--------");
-
 };
 
 $(document).on('change', "#number_orc",
@@ -95,6 +85,7 @@ function valid() {
         
         selectFilter();
         pcp();
+        descForm();
 
     }
     else {
@@ -248,6 +239,8 @@ function filtro() {
 
     var numeroProjeto = dataset.values[0].numb_project;
 
+    
+
     //Tela de filtro
     $('#number_project').val(numeroProjeto);
     $('#client_patroc_search').val(clientePatroc);
@@ -324,22 +317,28 @@ function pcp() {
         text: "Selecione..."
     }));
 
+    console.log('--90---');
+    console.log(array3);
+    console.log('--90---');
+
+    var nItem = 0;
     for (var i = 0; i < countRow; i++) {
 
         wdkAddChild('tb_sub');
-
-        var nSub = array3.values[i].tb_n_h
+        nItem++;
         var descric = array3.values[i].tb_descricao_h
         var respon = array3.values[i].tb_responsavel_h
+        var orc = array3.values[i].tb2_orc
 
-        $('#tb_nitem___'+(i+1)).val(nSub);
+        $('#tb_nitem___'+(i+1)).val(nItem);
+        $('#tb_orc___'+(i+1)).val(orc);
         $('#tb_descSI___'+(i+1)).val(descric);
         $('#tb_respon___'+(i+1)).val(respon);
 
         $('#selectNumber').append($('<option>', {
 
-            value: nSub,
-            text: nSub
+            value: nItem,
+            text: nItem+' - '+descric
         }));
 
     }
@@ -509,5 +508,21 @@ function validation() {
     else {
         saveAction();
     }
+
+}
+
+function descForm() {
+    
+		
+    var name = $('#nOrc_project').val();
+    var nProject = $('#nProject').val();
+    var dataset = DatasetFactory.getDataset("processAttachment", null, null, null);
+    var nRow = dataset.values.length;
+
+    var nProcess = dataset.values[nRow-1]['processAttachmentPK.processInstanceId'];
+
+    $('#descForm').val(nProcess+1+' - '+name+' - '+nProject);
+		
+    
 
 }

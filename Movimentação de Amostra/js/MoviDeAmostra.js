@@ -28,23 +28,19 @@ function hoje(id) {
 	
     // Guarda cada pedaço em uma variável
     var dia = data.getDate();           // 1-31
-    var mes = data.getMonth();          // 0-11 (zero=janeiro)
+    var mes = data.getMonth() +1;          // 0-11 (zero=janeiro)
     var ano4 = data.getFullYear();      // 4 dígitos
     
     // Formata a data e a hora (note o mês + 1)
 
-    if(mes > 9) {
-        if (dia > 9) {
-            var str_data = dia + '/' + (mes+1) + '/' + ano4;
-        }
-        var str_data = '0' + dia + '/' + (mes+1) + '/' + ano4;
+    if(mes < 10) {
+        mes = '0'+mes;
     }
-    else if (dia < 9) {
-        var str_data = '0' + dia + '/' + '0' + (mes+1) + '/' + ano4;
+    if(dia < 10) {
+        dia = '0'+dia;
     }
-    else {
-        var str_data = dia + '/' + '0' + (mes+1) + '/' + ano4;
-    }
+
+    var str_data = dia+'/'+mes+'/'+ano4
 
     $('#'+id).val(str_data);
     return str_data;
@@ -61,14 +57,16 @@ function busca(id0, id1, id2, id3, id4) {
 
     //Busca o dataset
     var dataset = DatasetFactory.getDataset("DSFormulariodeCadastrodeAmostra", null, constraints, null);
+    console.log(dataset);
 
     $('#'+id0).val(dataset.values[0].select_orc);
     $('#'+id1).val(dataset.values[0].name_prod);
     $('#'+id2).val(dataset.values[0].date_receb);
     $('#'+id3).val(dataset.values[0].fip_sn);
     $('#'+id4).val(dataset.values[0].formula_sn);
-
-    $('#cod_externo').val(($('#cod_interno').val())[0]);
+    $('#cod_amt').val(dataset.values[0].numb_project);
+    $('#medida_solict').val(dataset.values[0].qnt_fracionada);
+    $('#medida_regist').val(dataset.values[0].qnt_fracionada);
     
     var nO = dataset.values[0].select_orc;
 
@@ -101,6 +99,7 @@ function table() {
     var resp = getWKUser();
     var quant = $('#qtd_regist').val();
     var unid = $('#medida_regist').val();
+    var cod = $('#cod_amt').val();
 
     $('#tb_nAcao___'+rowCount).val(rowCount);
     $('#tb_acao___'+rowCount).val(acao);
@@ -108,10 +107,10 @@ function table() {
     $('#tb_resp___'+rowCount).val(resp);
     $('#tb_quant___'+rowCount).val(quant);
     $('#tb_unid___'+rowCount).val(unid);
+    $('#tb_cod___'+rowCount).val(cod);
 
     $('#acao').val("");
     $('#qtd_regist').val("");
-    $('#medida_regist').val("");
 
 };
 
@@ -147,3 +146,16 @@ function navegation(numState) {
 
 };
 
+$(document).on('change', "#solicitacao",
+    function descFormId() {
+		
+		var name = $('#solicitacao').val();
+		var dataset = DatasetFactory.getDataset("processAttachment", null, null, null);
+		var nRow = dataset.values.length;
+	
+		var nProcess = dataset.values[nRow-1]['processAttachmentPK.processInstanceId'];
+	
+		$('#descForm').val(nProcess+1+' - '+name);
+		
+    }
+);

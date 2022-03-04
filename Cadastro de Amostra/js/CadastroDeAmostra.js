@@ -1,12 +1,10 @@
 window.onload = function() {
 
-    nProjeto();
-
 };
 
 function orcamento() {
 
-try {
+
 
 //TABELA ORÇAMENTO
 
@@ -29,10 +27,6 @@ try {
     var const_t = new Array(tb2Constraint);
     var array3 = DatasetFactory.getDataset("DSCadastroGeral", null, const_t, null); 
 
-    console.log(orcamento);
-    console.log(array2);
-    console.log(array3);
-
     $('#name_prod').val(array2.values[0].tb_descricaoItem);
 
 //TABELA ORCAMENTO - ORÇAMENTO
@@ -44,18 +38,22 @@ try {
     var docConstraint = DatasetFactory.createConstraint("tb1_orc", orcamento, orcamento, ConstraintType.MUST); // Nome do campo a uzar como parâmetro
     var arrayConstraint = new Array(tbConstraint, docConstraint); // Tranformas as duas constraint em Array
 
+    var constraintArray =  DatasetFactory.createConstraint("idO", orcamento, orcamento, ConstraintType.MUST);
+    var arrayOrcament = new Array(constraintArray);
+
     // Busca no Dataset + Condições de Filtro
-    var array = DatasetFactory.getDataset("DSCadastroGeral", null, arrayConstraint, null);
+    var array = DatasetFactory.getDataset("DSCadastroGeral", null, arrayOrcament, null);
 
-    var codPatroc = dataset.values[0].codClientP;
+    var projectN = array.values[0].nProj;  
+    
+    $('#numb_project').val(projectN);
+    
 
-    $('#lote_int').val($('#cod_amt').val() + '/' + codPatroc + '/' + orcamento);
-}
 
-catch (e) {
-    alert('Houve um erro inesperado com esse orçamento, notifeque e tente mais tarde');
+/*catch (e) {
+    alert('Houve um erro inesperado com esse orçamento, tente novamente');
     console.log('Erro --> '+e);
-}
+}*/
 
 }
 
@@ -65,14 +63,34 @@ $(document).on('change', "#select_orc",
     }
 );
 
-function nProjeto() {
+function onlyN(string) {
+    var numsStr = string.replace(/[^0-9]/g,'');
+    return parseInt(numsStr);
+}
+
+function numbZero(number) {
+    n = parseInt(number);
+    if (n < 10) {
+        n = '00'+n;
+    }
+    else if (n < 100) {
+        n = '0'+n;
+    }
     
-    var array = DatasetFactory.getDataset("DSFormulariodeCadastrodeAmostra", null, null, null);
+    return n;
+}
 
-    var array2 = DatasetFactory.getDataset("DSFormulariodeCadastrodeAmostra", null, null, null);
-
-    $('#numb_project').val('NP-' + ((array.values.length) + 1));
-    $('#cod_amt').val('AMT-' + ((array2.values.length) + 1));
-
-
-};
+$(document).on('change', "#cod_amt",
+    function descFormId() {
+		
+		var name = $('#cod_amt').val();
+        var nProject = $('#numb_project').val();
+		var dataset = DatasetFactory.getDataset("processAttachment", null, null, null);
+		var nRow = dataset.values.length;
+	
+		var nProcess = dataset.values[nRow-1]['processAttachmentPK.processInstanceId'];
+	
+		$('#descForm').val(nProcess+1+' - '+name+' - '+nProject);
+		
+    }
+);
